@@ -34,6 +34,8 @@ module.exports = function toReadable (number) {
           if (array[1] === '1') return 'eleven';
           else if  (array[1] === '2') return 'twelve';
           else if (array[1] === '3') return 'thirteen';
+          else if (array[1] === '5') return 'fifteen';
+          else if (array[1] === '8') return 'eighteen';
           else if (array[1] === '0') return 'ten';
           else return simpleNumber(array[1]) + 'teen';
       }
@@ -43,6 +45,15 @@ module.exports = function toReadable (number) {
       else if (array[0] === '3'){
         return 'thirty ' + simpleNumber(array[1]); 
       }
+      else if (array[0] === '4'){
+        return 'forty ' + simpleNumber(array[1]);
+      }
+      else if (array[0] === '5'){
+        return 'fifty ' + simpleNumber(array[1]);
+      }
+      else if (array[0] === '8'){
+        return 'eighty ' + simpleNumber(array[1]);
+      }
       else return (simpleNumber(array[0])+ 'ty ' + simpleNumber(array[1])).trim();
   }
   else if (array.length === 3){
@@ -50,6 +61,8 @@ module.exports = function toReadable (number) {
       if (array[2] === '1') return 'eleven';
       else if  (array[2] === '2') return 'twelve';
       else if (array[2] === '3') return 'thirteen';
+      else if (array[2] === '5') return 'fifteen';
+      else if (array[2] === '8') return 'eighteen';
       else if (array[2] === '0') return 'ten';
       else return simpleNumber(array[2]) + 'teen';
   }
@@ -68,14 +81,16 @@ module.exports = function toReadable (number) {
   else if (array[1] === '8'){
     return 'eighty ' + simpleNumber(array[2]);
   }
-  else return (simpleNumber(array[1])+ 'ty ' + simpleNumber(array[2])).trim();
+  else if (array[1] !== '0') return (simpleNumber(array[1])+ 'ty ' + simpleNumber(array[2])).trim();
+  else return (simpleNumber(array[1]) + simpleNumber(array[2])).trim()
   }
 }
   if (splittedNumber.length === 1){
-    return simpleNumber(splittedNumber[0]);
+    if (splittedNumber[0] === '0') return 'zero';
+   else return simpleNumber(splittedNumber[0]);
   }
   else if (splittedNumber.length === 2){
-    decim(splittedNumber);
+    return decim(splittedNumber).trim();
   }
   else if (splittedNumber.length === 3){
     return (simpleNumber(splittedNumber[0]) + ' hundred ' + decim(splittedNumber)).trim();
